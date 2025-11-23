@@ -107,7 +107,11 @@ struct Vec3 {
     // t = 1.0 returns end
     // t = 0.5 returns exactly halfway
     static Vec3 lerp(const Vec3& start, const Vec3& end, float t) {
-        return start + (end - start) * t;
+        return Vec3(
+            std::lerp(start.x, end.x, t),
+            std::lerp(start.y, end.y, t),
+            std::lerp(start.z, end.z, t)
+        );
     }
     // refection logic (bouncing off a surface)
     // incident is the incoming ray, normal is the surface direction
