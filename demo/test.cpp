@@ -8,6 +8,6 @@ int main(void) {
     Vec3 v3 = v1 + v2;
     v1 += v3 -= v2;
     v1 = Vec3::cross(v2, v3);
-    std::println("V1: {} {} {}", v1.x, v1.y, v1.z);
+    std::println("V1: {}", v1);
     return 0;
 }
