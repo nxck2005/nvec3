@@ -8,8 +8,7 @@ A simple, header-only C++20 library for 3D vector mathematics.
 ## Features
 
 - Intuitive vector arithmetic (`+`, `-`, `*`, `/`).
-- Functions for dot product, cross product, magnitude, and normalization.
-- Includes other useful vector functions like `lerp`, `reflect`, and `distance`.
+- Functions for dot product, cross product, magnitude, norm, lerp etc.
 
 ## Usage
 
