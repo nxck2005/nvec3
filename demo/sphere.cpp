@@ -65,7 +65,7 @@ int main() {
 
         std::cout << buffer;
 
-        time += 0.05f;
+        time += 0.01f;
         std::this_thread::sleep_for(std::chrono::milliseconds(33));
     }
 
