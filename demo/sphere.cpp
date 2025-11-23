@@ -15,7 +15,7 @@ int main() {
     Vec3 spherePos(0.0f, 0.0f, 0.0f);
     float sphereRad = 1.0f;
 
-    std::string gradient = " .:!/r(l1Z4H9W8$@";
+    std::string gradient = " .'`,:;i><~+-?1/rxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
     int gradLen = gradient.length();
 
     float time = 0.0f;
