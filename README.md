@@ -1,7 +1,7 @@
 # nvec3
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![Language](https://img.shields.io/badge/language-C%2B%2B17-blue.svg)
+![Language](https://img.shields.io/badge/language-C%2B%2B20-blue.svg)
 
 A simple, header-only C++20 library for 3D vector mathematics.
 
