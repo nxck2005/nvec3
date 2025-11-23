@@ -82,7 +82,6 @@ struct Vec3 {
         if (len == 0.0f) return *this;
         return Vec3(this->x / len, this->y / len, this->z / len);
     }
-    // add linear interp later
 
     // static funcs
     // anything that treats both vecs equally are going to be implemented as static.
@@ -101,6 +100,30 @@ struct Vec3 {
 
     static Vec3 normalize(const Vec3& vec) {
         return vec.normalized();
+    }
+
+    // linear interpolation
+    // t = 0.0 returns start
+    // t = 1.0 returns end
+    // t = 0.5 returns exactly halfway
+    static Vec3 lerp(const Vec3& start, const Vec3& end, float t) {
+        return start + (end - start) * t;
+    }
+    // refection logic (bouncing off a surface)
+    // incident is the incoming ray, normal is the surface direction
+    // normal ray must be normalized
+    static Vec3 reflect(const Vec3& incident, const Vec3& normal) {
+        return incident - normal * (2.0f * dot(incident, normal));
+    }
+
+    // distance between two vectors
+    static float distance(const Vec3& a, const Vec3& b) {
+        return (a - b).length();
+    }
+    // faster ver for simpler checks. doesn't do sqrt
+    // try as (if distsq < range * range)..
+    static float distanceSquared(const Vec3& a, const Vec3& b) {
+        return (a - b).length2();
     }
 };
 
