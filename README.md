@@ -7,11 +7,9 @@ A simple, header-only C++20 library for 3D vector mathematics.
 
 ## Features
 
-- Just include `vec3.hpp`.
 - Intuitive vector arithmetic (`+`, `-`, `*`, `/`).
 - Functions for dot product, cross product, magnitude, and normalization.
 - Includes other useful vector functions like `lerp`, `reflect`, and `distance`.
-- Lightweight and extenal dependency-free.
 
 ## Usage
 
