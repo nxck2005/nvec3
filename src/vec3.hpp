@@ -44,6 +44,17 @@ struct Vec3 {
         return Vec3(this->x / scalar, this->y / scalar, this->z / scalar);
     }
 
+    Vec3& operator *= (const float scalar) {
+        this->x *= scalar;
+        this->y *= scalar;
+        this->z *= scalar;
+        return *this;
+    }
+
+    Vec3 operator * (const float scalar) const {
+        return Vec3(this->x * scalar, this->y * scalar, this->z * scalar);
+    }
+
     // utility functions (ideas from game engines)
     static Vec3 zero() {
         return Vec3(0.0f, 0.0f, 0.0f);
