@@ -69,11 +69,18 @@ struct Vec3 {
 
     // length func
     float length() const {
-        return std::sqrt((this->x * this->x) + (this->y * this->y) + (this->z + this->z));
+        return std::sqrt((this->x * this->x) + (this->y * this->y) + (this->z * this->z));
     }
     // length^2 func
     float length2() const {
-        return (this->x * this->x) + (this->y * this->y) + (this->z + this->z);
+        return (this->x * this->x) + (this->y * this->y) + (this->z * this->z);
+    }
+
+    Vec3 normalized() const {
+        float len = this->length();
+        // TODO : add epsilon check later
+        if (len == 0.0f) return *this;
+        return Vec3(this->x / len, this->y / len, this->z / len);
     }
     // add linear interp later
 
@@ -91,4 +98,13 @@ struct Vec3 {
             (first.x * second.y) - (first.y * second.x)   // z component
         );
     }
+
+    static Vec3 normalize(const Vec3& vec) {
+        return vec.normalized();
+    }
 };
+
+// handles "2.0 * vec"
+inline Vec3 operator * (float scalar, const Vec3& v) {
+    return v * scalar; // calls the main overload
+}
