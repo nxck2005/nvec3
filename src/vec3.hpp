@@ -31,6 +31,19 @@ struct Vec3 {
         return Vec3(this->x - other.x, this->y - other.y, this->z - other.z);
     }
 
+    // Scalar div and mult
+    Vec3& operator /= (const float scalar) {
+        // todo; add an assert for 0?
+        this->x /= scalar;
+        this->y /= scalar;
+        this->z /= scalar;
+        return *this;
+    }
+
+    Vec3 operator / (const float scalar) const {
+        return Vec3(this->x / scalar, this->y / scalar, this->z / scalar);
+    }
+
     // utility functions (ideas from game engines)
     static Vec3 zero() {
         return Vec3(0.0f, 0.0f, 0.0f);
@@ -42,4 +55,7 @@ struct Vec3 {
         return Vec3(0.0f, 1.0f, 0.0f);
     }
     // add linear interp later
+
+    // Vector and Dot product
+
 };
