@@ -1,6 +1,8 @@
 #pragma once
 
 #include <cmath>
+#include <format>
+#include <string>
 struct Vec3 {
     float x;
     float y;
@@ -130,7 +132,12 @@ struct Vec3 {
         return (a - b).length2();
     }
 };
-
+template <>
+struct std::formatter<Vec3> : std::formatter<std::string> {
+    auto format(const Vec3& v, format_context& ctx) const {
+        return format_to(ctx.out(), "({:.2f}, {:.2f}, {:.2f})", v.x, v.y, v.z);
+    }
+};
 // handles "2.0 * vec"
 inline Vec3 operator * (float scalar, const Vec3& v) {
     return v * scalar; // calls the main overload
