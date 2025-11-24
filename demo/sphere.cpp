@@ -11,7 +11,7 @@ int main() {
     int height = 40;
     float aspect = (float)width / height * 0.5f;
 
-    Vec3 spherePos(0.0f, 0.0f, 0.0f);
+    nvec3::Vec3 spherePos(0.0f, 0.0f, 0.0f);
     float sphereRad = 1.0f;
 
     std::string gradient = " .:!/r(l1Z4H9W8$@";
@@ -22,7 +22,7 @@ int main() {
     std::cout << "\x1b[?25l";
 
     while (true) {
-        Vec3 lightDir = Vec3(std::sin(time), 1.0f, std::cos(time)).normalized();
+        nvec3::Vec3 lightDir = nvec3::Vec3(std::sin(time), 1.0f, std::cos(time)).normalized();
 
         std::string buffer;
         buffer.reserve(width * height + height);
@@ -35,22 +35,22 @@ int main() {
                 float u = (float)x / width * 2.0f - 1.0f;
                 float v = (float)y / height * 2.0f - 1.0f;
 
-                Vec3 rayOrigin(0.0f, 0.0f, -2.0f);
-                Vec3 rayDir = Vec3(u * aspect, v, 1.0f).normalized();
+                nvec3::Vec3 rayOrigin(0.0f, 0.0f, -2.0f);
+                nvec3::Vec3 rayDir = nvec3::Vec3(u * aspect, v, 1.0f).normalized();
 
-                Vec3 toSphere = spherePos - rayOrigin;
-                float t = Vec3::dot(toSphere, rayDir);
+                nvec3::Vec3 toSphere = spherePos - rayOrigin;
+                float t = nvec3::Vec3::dot(toSphere, rayDir);
 
-                Vec3 closest = rayOrigin + (rayDir * t);
+                nvec3::Vec3 closest = rayOrigin + (rayDir * t);
                 float dist = (spherePos - closest).length();
 
                 if (dist < sphereRad) {
                     float offset = std::sqrt(sphereRad * sphereRad - dist * dist);
-                    Vec3 hitPoint = closest - (rayDir * offset);
+                    nvec3::Vec3 hitPoint = closest - (rayDir * offset);
 
-                    Vec3 normal = (hitPoint - spherePos).normalized();
+                    nvec3::Vec3 normal = (hitPoint - spherePos).normalized();
 
-                    float intensity = Vec3::dot(normal, lightDir);
+                    float intensity = nvec3::Vec3::dot(normal, lightDir);
                     if (intensity < 0.0f) intensity = 0.0f;
 
                     int idx = (int)(intensity * (gradLen - 1));
