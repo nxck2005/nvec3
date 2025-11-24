@@ -118,7 +118,7 @@ namespace nvec3 {
         Vec3 normalized() const {
             float len = this->length();
             // TODO : add epsilon check later
-            if (len == 0.0f) return *this;
+            if (len < 1e-6f) return Vec3::zero();
             return Vec3(this->x / len, this->y / len, this->z / len);
         }
 
