@@ -14,7 +14,8 @@ int main() {
     nvec3::Vec3 spherePos(0.0f, 0.0f, 0.0f);
     float sphereRad = 1.0f;
 
-    std::string gradient = " .:!/r(l1Z4H9W8$@";
+    //std::string gradient = " .:!/r(l1Z4H9W8$@";
+    std::string gradient = " .,-~:;=!*R#$@";
     int gradLen = gradient.length();
 
     float time = 0.0f;
@@ -47,12 +48,12 @@ int main() {
                 if (dist < sphereRad) {
                     float offset = std::sqrt(sphereRad * sphereRad - dist * dist);
                     nvec3::Vec3 hitPoint = closest - (rayDir * offset);
-
                     nvec3::Vec3 normal = (hitPoint - spherePos).normalized();
-
-                    float intensity = nvec3::Vec3::dot(normal, lightDir);
-                    if (intensity < 0.0f) intensity = 0.0f;
-
+                    float ambientStrength = 0.08f; 
+                    float diffuseStrength = nvec3::Vec3::dot(normal, lightDir);
+                    if (diffuseStrength < 0.0f) diffuseStrength = 0.0f;
+                    float intensity = ambientStrength + diffuseStrength;
+                    if (intensity > 1.0f) intensity = 1.0f;
                     int idx = (int)(intensity * (gradLen - 1));
                     buffer += gradient[idx];
                 } else {
@@ -64,7 +65,7 @@ int main() {
 
         std::cout << buffer;
 
-        time += 0.01f;
+        time += 0.02f;
         std::this_thread::sleep_for(std::chrono::milliseconds(33));
     }
 
