@@ -3,6 +3,8 @@
 #include <cassert>
 #include <cmath> // For std::fabs
 
+using namespace nvec3;
+
 // A simple macro for testing equality of floats with a tolerance
 #define ASSERT_FLOAT_EQ(a, b, epsilon) \
     assert(std::fabs((a) - (b)) < (epsilon) && "Float values are not equal enough!")
@@ -97,7 +99,7 @@ void test_length_and_normalize() {
     nvec3::Vec3 normalized_zero = zero_vec.normalized();
     assert(normalized_zero.x == 0.0f && normalized_zero.y == 0.0f && normalized_zero.z == 0.0f && "Normalized zero vector failed");
 
-    nvec3::Vec3 normalized_static = nvec3::Vec3::normalize(v);
+    nvec3::Vec3 normalized_static = v.normalize();
     ASSERT_FLOAT_EQ(normalized_static.x, 0.6f, 0.0001f);
     ASSERT_FLOAT_EQ(normalized_static.y, 0.8f, 0.0001f);
     ASSERT_FLOAT_EQ(normalized_static.z, 0.0f, 0.0001f);

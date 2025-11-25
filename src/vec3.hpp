@@ -115,11 +115,28 @@ namespace nvec3 {
             return (this->x * this->x) + (this->y * this->y) + (this->z * this->z);
         }
 
-        Vec3 normalized() const {
-            float len = this->length();
-            // TODO : add epsilon check later
-            if (len < 1e-6f) return Vec3::zero();
-            return Vec3(this->x / len, this->y / len, this->z / len);
+        // normalization functions
+
+        // return a new, normalized version of the vector
+        Vec3 normalized() {
+            float lenSq = this->length2();
+            if (lenSq < 1e-12f) return Vec3::zero();
+            float invLen = 1.0f / std::sqrt(lenSq);
+            return Vec3(this->x * invLen, this->y * invLen, this->z * invLen);
+        }
+
+        // normalize the instance it was called by
+        Vec3& normalize() {
+            float lensq = this->length2();
+            if (lensq < 1e-12f) {
+                this->x = this->y = this->z = 0.0f;
+                return *this;
+            }
+            float invlen = 1.0f / std::sqrt(lensq);
+            this->x *= invlen;
+            this->y *= invlen;
+            this->z *= invlen;
+            return *this;
         }
 
         // static funcs
@@ -135,10 +152,6 @@ namespace nvec3 {
                 (first.z * second.x) - (first.x * second.z),  // y component
                 (first.x * second.y) - (first.y * second.x)   // z component
             );
-        }
-
-        static Vec3 normalize(const Vec3& vec) {
-            return vec.normalized();
         }
 
         // linear interpolation
