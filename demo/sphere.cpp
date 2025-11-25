@@ -49,7 +49,7 @@ int main() {
                     float offset = std::sqrt(sphereRad * sphereRad - dist * dist);
                     nvec3::Vec3 hitPoint = closest - (rayDir * offset);
                     nvec3::Vec3 normal = (hitPoint - spherePos).normalized();
-                    float ambientStrength = 0.08f; 
+                    float ambientStrength = 0.0f;
                     float diffuseStrength = nvec3::Vec3::dot(normal, lightDir);
                     if (diffuseStrength < 0.0f) diffuseStrength = 0.0f;
                     float intensity = ambientStrength + diffuseStrength;
