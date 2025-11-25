@@ -118,7 +118,7 @@ namespace nvec3 {
         // normalization functions
 
         // return a new, normalized version of the vector
-        Vec3 normalized() {
+        Vec3 normalized() const {
             float lenSq = this->length2();
             if (lenSq < 1e-12f) return Vec3::zero();
             float invLen = 1.0f / std::sqrt(lenSq);
