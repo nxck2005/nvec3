@@ -15,23 +15,23 @@ A simple, header-only C++20 library for 3D vector mathematics.
 To use `nvec3` in your project, simply include the `src/vec3.hpp` header file.
 
 ```cpp
-#include <iostream>
+#include <print>
 #include "vec3.hpp"
 
 int main() {
-    Vec3 v1(1.0f, 2.0f, 3.0f);
-    Vec3 v2(4.0f, 5.0f, 6.0f);
+    nvec3::Vec3 v1(1.0f, 2.0f, 3.0f);
+    nvec3::Vec3 v2(4.0f, 5.0f, 6.0f);
 
     // Add two vectors
-    Vec3 sum = v1 + v2;
-    std::cout << "Sum: (" << sum.x << ", " << sum.y << ", " << sum.z << ")" << std::endl;
+    nvec3::Vec3 sum = v1 + v2;
+    std::println("Sum: {}", sum);
 
     // Calculate dot product
-    float dot_product = Vec3::dot(v1, v2);
-    std::cout << "Dot Product: " << dot_product << std::endl;
+    float dot_product = nvec3::dot(v1, v2);
+    std::println("Dot product: {}" , dot_product);
 
     // Calculate magnitude
-    std::cout << "Magnitude of v1: " << v1.length() << std::endl;
+    std::print("Magnitude: {}", v1.length());
 
     return 0;
 }
