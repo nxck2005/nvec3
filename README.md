@@ -5,6 +5,8 @@
 
 A simple, header-only C++20 library for 3D vector mathematics.
 
+https://github.com/user-attachments/assets/b7fc8333-d947-48fb-8745-2374c08810cf
+
 ## Features
 
 - Intuitive vector arithmetic (`+`, `-`, `*`, `/`).
@@ -48,13 +50,10 @@ To build the demo programs located in the `demo/` directory.
     ```
     The executable will be placed in the `build/` directory.
 
-2.  **Clean the build directory:**
+2.  **After you're done, you can clean the build directory:**
     ```sh
     make clean
     ```
-
-
-https://github.com/user-attachments/assets/b7fc8333-d947-48fb-8745-2374c08810cf
 
 
 ## License
