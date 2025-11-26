@@ -33,7 +33,7 @@ int main() {
     std::println("Dot product: {}" , dot_product);
 
     // Calculate magnitude
-    std::print("Magnitude: {}", v1.length());
+    std::println("Magnitude: {}", v1.length());
 
     return 0;
 }
