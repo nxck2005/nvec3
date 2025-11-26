@@ -40,6 +40,10 @@ SOFTWARE.
 #include <format>
 #include <string>
 namespace nvec3 {
+
+    inline constexpr float EPS = 1e-6f;
+    inline constexpr float EPSSQ = 1e-6f;
+
     struct Vec3 {
         float x;
         float y;
@@ -120,7 +124,7 @@ namespace nvec3 {
         // return a new, normalized version of the vector
         Vec3 normalized() const {
             float lenSq = this->length2();
-            if (lenSq < 1e-12f) return Vec3::zero();
+            if (lenSq < EPSSQ) return Vec3::zero();
             float invLen = 1.0f / std::sqrt(lenSq);
             return Vec3(this->x * invLen, this->y * invLen, this->z * invLen);
         }
@@ -128,7 +132,7 @@ namespace nvec3 {
         // normalize the instance it was called by
         Vec3& normalize() {
             float lensq = this->length2();
-            if (lensq < 1e-12f) {
+            if (lensq < EPSSQ) {
                 this->x = this->y = this->z = 0.0f;
                 return *this;
             }
