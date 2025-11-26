@@ -10,6 +10,8 @@
 
 nvec3: a simple vec3 single header lib in C++
    https://github.com/nxck2005/nvec3
+   
+   v0.1.0 beta
 
 MIT License
 
