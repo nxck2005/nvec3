@@ -112,18 +112,18 @@ void test_dot_cross() {
     nvec3::Vec3 v2(0.0f, 1.0f, 0.0f); // y-axis
 
     // Dot product
-    ASSERT_FLOAT_EQ(nvec3::Vec3::dot(v1, v2), 0.0f, 0.0001f);
+    ASSERT_FLOAT_EQ(nvec3::dot(v1, v2), 0.0f, 0.0001f);
     nvec3::Vec3 v3(2.0f, 3.0f, 4.0f);
     nvec3::Vec3 v4(5.0f, 6.0f, 7.0f);
-    ASSERT_FLOAT_EQ(nvec3::Vec3::dot(v3, v4), (2.0f * 5.0f + 3.0f * 6.0f + 4.0f * 7.0f), 0.0001f); // 10 + 18 + 28 = 56
+    ASSERT_FLOAT_EQ(nvec3::dot(v3, v4), (2.0f * 5.0f + 3.0f * 6.0f + 4.0f * 7.0f), 0.0001f); // 10 + 18 + 28 = 56
 
     // Cross product
-    nvec3::Vec3 cross_prod = nvec3::Vec3::cross(v1, v2); // should be (0,0,1) for x cross y
+    nvec3::Vec3 cross_prod = nvec3::cross(v1, v2); // should be (0,0,1) for x cross y
     ASSERT_FLOAT_EQ(cross_prod.x, 0.0f, 0.0001f);
     ASSERT_FLOAT_EQ(cross_prod.y, 0.0f, 0.0001f);
     ASSERT_FLOAT_EQ(cross_prod.z, 1.0f, 0.0001f);
 
-    cross_prod = nvec3::Vec3::cross(v2, v1); // should be (0,0,-1) for y cross x
+    cross_prod = nvec3::cross(v2, v1); // should be (0,0,-1) for y cross x
     ASSERT_FLOAT_EQ(cross_prod.x, 0.0f, 0.0001f);
     ASSERT_FLOAT_EQ(cross_prod.y, 0.0f, 0.0001f);
     ASSERT_FLOAT_EQ(cross_prod.z, -1.0f, 0.0001f);
@@ -135,16 +135,16 @@ void test_lerp() {
     nvec3::Vec3 start(0.0f, 0.0f, 0.0f);
     nvec3::Vec3 end(10.0f, 10.0f, 10.0f);
 
-    nvec3::Vec3 result0 = nvec3::Vec3::lerp(start, end, 0.0f);
+    nvec3::Vec3 result0 = nvec3::lerp(start, end, 0.0f);
     assert(result0.x == 0.0f && result0.y == 0.0f && result0.z == 0.0f && "lerp t=0 failed");
 
-    nvec3::Vec3 result1 = nvec3::Vec3::lerp(start, end, 1.0f);
+    nvec3::Vec3 result1 = nvec3::lerp(start, end, 1.0f);
     assert(result1.x == 10.0f && result1.y == 10.0f && result1.z == 10.0f && "lerp t=1 failed");
 
-    nvec3::Vec3 result0_5 = nvec3::Vec3::lerp(start, end, 0.5f);
+    nvec3::Vec3 result0_5 = nvec3::lerp(start, end, 0.5f);
     assert(result0_5.x == 5.0f && result0_5.y == 5.0f && result0_5.z == 5.0f && "lerp t=0.5 failed");
 
-    nvec3::Vec3 result0_25 = nvec3::Vec3::lerp(start, end, 0.25f);
+    nvec3::Vec3 result0_25 = nvec3::lerp(start, end, 0.25f);
     assert(result0_25.x == 2.5f && result0_25.y == 2.5f && result0_25.z == 2.5f && "lerp t=0.25 failed");
     std::cout << "test_lerp passed." << std::endl;
 }
@@ -156,7 +156,7 @@ void test_reflect() {
     // Surface normal (normalized)
     nvec3::Vec3 normal(0.0f, 1.0f, 0.0f); // Surface normal pointing upwards
 
-    nvec3::Vec3 reflected = nvec3::Vec3::reflect(incident, normal);
+    nvec3::Vec3 reflected = nvec3::reflect(incident, normal);
     // Expected reflected vector: (1.0, 1.0, 0.0)
     ASSERT_FLOAT_EQ(reflected.x, 1.0f, 0.0001f);
     ASSERT_FLOAT_EQ(reflected.y, 1.0f, 0.0001f);
@@ -164,7 +164,7 @@ void test_reflect() {
 
     // Test with another incident angle
     incident = nvec3::Vec3(-1.0f, -1.0f, 0.0f);
-    reflected = nvec3::Vec3::reflect(incident, normal);
+    reflected = nvec3::reflect(incident, normal);
     // Expected: (-1.0, 1.0, 0.0)
     ASSERT_FLOAT_EQ(reflected.x, -1.0f, 0.0001f);
     ASSERT_FLOAT_EQ(reflected.y, 1.0f, 0.0001f);
@@ -172,7 +172,7 @@ void test_reflect() {
 
     // Incident straight into the normal
     incident = nvec3::Vec3(0.0f, -1.0f, 0.0f);
-    reflected = nvec3::Vec3::reflect(incident, normal);
+    reflected = nvec3::reflect(incident, normal);
     // Expected: (0.0, 1.0, 0.0)
     ASSERT_FLOAT_EQ(reflected.x, 0.0f, 0.0001f);
     ASSERT_FLOAT_EQ(reflected.y, 1.0f, 0.0001f);
@@ -186,13 +186,13 @@ void test_distance() {
     nvec3::Vec3 v1(0.0f, 0.0f, 0.0f);
     nvec3::Vec3 v2(3.0f, 4.0f, 0.0f); // Distance should be 5
 
-    ASSERT_FLOAT_EQ(nvec3::Vec3::distance(v1, v2), 5.0f, 0.0001f);
-    ASSERT_FLOAT_EQ(nvec3::Vec3::distanceSquared(v1, v2), 25.0f, 0.0001f);
+    ASSERT_FLOAT_EQ(nvec3::distance(v1, v2), 5.0f, 0.0001f);
+    ASSERT_FLOAT_EQ(nvec3::distanceSquared(v1, v2), 25.0f, 0.0001f);
 
     nvec3::Vec3 v3(1.0f, 1.0f, 1.0f);
     nvec3::Vec3 v4(1.0f, 1.0f, 1.0f);
-    ASSERT_FLOAT_EQ(nvec3::Vec3::distance(v3, v4), 0.0f, 0.0001f);
-    ASSERT_FLOAT_EQ(nvec3::Vec3::distanceSquared(v3, v4), 0.0f, 0.0001f);
+    ASSERT_FLOAT_EQ(nvec3::distance(v3, v4), 0.0f, 0.0001f);
+    ASSERT_FLOAT_EQ(nvec3::distanceSquared(v3, v4), 0.0f, 0.0001f);
     std::cout << "test_distance passed." << std::endl;
 }
 

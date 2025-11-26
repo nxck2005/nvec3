@@ -100,29 +100,29 @@ namespace nvec3 {
         }
 
         // utility functions (ideas from game engines)
-        constexpr static Vec3 zero() {
+        [[nodiscard]] constexpr static Vec3 zero() noexcept {
             return Vec3(0.0f, 0.0f, 0.0f);
         }
-        constexpr static Vec3 one() {
+        [[nodiscard]] constexpr static Vec3 one() noexcept {
             return Vec3(1.0f, 1.0f, 1.0f);
         }
-        constexpr static Vec3 up() {
+        [[nodiscard]] constexpr static Vec3 up() noexcept {
             return Vec3(0.0f, 1.0f, 0.0f);
         }
 
         // length func
-        float length() const {
+        [[nodiscard]] float length() const noexcept {
             return std::sqrt((this->x * this->x) + (this->y * this->y) + (this->z * this->z));
         }
         // length^2 func
-        constexpr float length2() const {
+        [[nodiscard]] constexpr float length2() const noexcept {
             return (this->x * this->x) + (this->y * this->y) + (this->z * this->z);
         }
 
         // normalization functions
 
         // return a new, normalized version of the vector
-        Vec3 normalized() const {
+        [[nodiscard]] Vec3 normalized() const noexcept {
             float lenSq = this->length2();
             if (lenSq < EPSSQ) return Vec3::zero();
             float invLen = 1.0f / std::sqrt(lenSq);
@@ -130,7 +130,7 @@ namespace nvec3 {
         }
 
         // normalize the instance it was called by
-        Vec3& normalize() {
+        Vec3& normalize() noexcept {
             float lensq = this->length2();
             if (lensq < EPSSQ) {
                 this->x = this->y = this->z = 0.0f;
@@ -142,52 +142,48 @@ namespace nvec3 {
             this->z *= invlen;
             return *this;
         }
-
-        // static funcs
-        // anything that treats both vecs equally are going to be implemented as static.
-        // Vector and Dot product
-        constexpr static float dot(const Vec3& first, const Vec3& second) {
-            return (first.x * second.x) + (first.y * second.y) + (first.z * second.z);
-        }
-
-        constexpr static Vec3 cross(const Vec3& first, const Vec3& second) {
-            return Vec3(
-                (first.y * second.z) - (first.z * second.y),  // x component
-                (first.z * second.x) - (first.x * second.z),  // y component
-                (first.x * second.y) - (first.y * second.x)   // z component
-            );
-        }
-
-        // linear interpolation
-        // t = 0.0 returns start
-        // t = 1.0 returns end
-        // t = 0.5 returns exactly halfway
-        constexpr static Vec3 lerp(const Vec3& start, const Vec3& end, float t) {
-            return Vec3(
-                std::lerp(start.x, end.x, t),
-                std::lerp(start.y, end.y, t),
-                std::lerp(start.z, end.z, t)
-            );
-        }
-        // refection logic (bouncing off a surface)
-        // incident is the incoming ray, normal is the surface direction
-        // normal ray must be normalized
-        constexpr static Vec3 reflect(const Vec3& incident, const Vec3& normal) {
-            return incident - normal * (2.0f * dot(incident, normal));
-        }
-
-        // distance between two vectors
-        static float distance(const Vec3& a, const Vec3& b) {
-            return (a - b).length();
-        }
-        // faster ver for simpler checks. doesn't do sqrt
-        // try as (if distsq < range * range)..
-        constexpr static float distanceSquared(const Vec3& a, const Vec3& b) {
-            return (a - b).length2();
-        }
     };
+    // anything that treats both vecs equally are going to be implemented as free functions.
+    // Vector and Dot product
+    [[nodiscard]] constexpr float dot(const Vec3& first, const Vec3& second) noexcept {
+        return (first.x * second.x) + (first.y * second.y) + (first.z * second.z);
+    }
+    [[nodiscard]] constexpr Vec3 cross(const Vec3& first, const Vec3& second) noexcept {
+        return Vec3(
+            (first.y * second.z) - (first.z * second.y),  // x component
+            (first.z * second.x) - (first.x * second.z),  // y component
+            (first.x * second.y) - (first.y * second.x)   // z component
+        );
+    }
+    // refection logic (bouncing off a surface)
+    // incident is the incoming ray, normal is the surface direction
+    // normal ray must be normalized
+    [[nodiscard]] constexpr Vec3 reflect(const Vec3& incident, const Vec3& normal) noexcept {
+        return incident - normal * (2.0f * dot(incident, normal));
+    }
+
+    // distance between two vectors
+    [[nodiscard]] inline float distance(const Vec3& a, const Vec3& b) noexcept {
+        return (a - b).length();
+    }
+    // faster ver for simpler checks. doesn't do sqrt
+    // try as (if distsq < range * range)..
+    [[nodiscard]] constexpr inline float distanceSquared(const Vec3& a, const Vec3& b) noexcept {
+        return (a - b).length2();
+    }
+    // linear interpolation
+    // t = 0.0 returns start
+    // t = 1.0 returns end
+    // t = 0.5 returns exactly halfway
+    [[nodiscard]] constexpr Vec3 lerp(const Vec3& start, const Vec3& end, float t) noexcept {
+        return Vec3(
+            std::lerp(start.x, end.x, t),
+            std::lerp(start.y, end.y, t),
+            std::lerp(start.z, end.z, t)
+        );
+    }
     // handles "2.0 * vec"
-    constexpr inline Vec3 operator * (float scalar, const Vec3& v) {
+    [[nodiscard]] constexpr inline Vec3 operator * (float scalar, const Vec3& v) noexcept {
         return v * scalar; // calls the main overload
     }
 }

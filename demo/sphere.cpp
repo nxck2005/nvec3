@@ -40,7 +40,7 @@ int main() {
                 nvec3::Vec3 rayDir = nvec3::Vec3(u * aspect, v, 1.0f).normalized();
 
                 nvec3::Vec3 toSphere = spherePos - rayOrigin;
-                float t = nvec3::Vec3::dot(toSphere, rayDir);
+                float t = nvec3::dot(toSphere, rayDir);
 
                 nvec3::Vec3 closest = rayOrigin + (rayDir * t);
                 float dist = (spherePos - closest).length();
@@ -50,7 +50,7 @@ int main() {
                     nvec3::Vec3 hitPoint = closest - (rayDir * offset);
                     nvec3::Vec3 normal = (hitPoint - spherePos).normalized();
                     float ambientStrength = 0.0f;
-                    float diffuseStrength = nvec3::Vec3::dot(normal, lightDir);
+                    float diffuseStrength = nvec3::dot(normal, lightDir);
                     if (diffuseStrength < 0.0f) diffuseStrength = 0.0f;
                     float intensity = ambientStrength + diffuseStrength;
                     if (intensity > 1.0f) intensity = 1.0f;
