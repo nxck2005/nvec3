@@ -42,7 +42,7 @@ SOFTWARE.
 namespace nvec3 {
 
     inline constexpr float EPS = 1e-6f;
-    inline constexpr float EPSSQ = 1e-6f;
+    inline constexpr float EPSSQ = 1e-12f;
 
     struct Vec3 {
         float x;
