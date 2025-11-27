@@ -70,6 +70,30 @@ void test_scalar_division() {
     std::cout << "test_scalar_division passed." << std::endl;
 }
 
+void test_array_indexing() {
+    std::cout << "Running test_array_indexing..." << std::endl;
+    nvec3::Vec3 v(1.0f, 2.0f, 3.0f);
+    
+    // Test reading
+    assert(v[0] == 1.0f && "v[0] read failed");
+    assert(v[1] == 2.0f && "v[1] read failed");
+    assert(v[2] == 3.0f && "v[2] read failed");
+
+    // Test writing
+    v[0] = 10.0f;
+    v[1] = 20.0f;
+    v[2] = 30.0f;
+    assert(v.x == 10.0f && v.y == 20.0f && v.z == 30.0f && "Array indexing write failed");
+
+    // Test const access
+    const nvec3::Vec3 cv(4.0f, 5.0f, 6.0f);
+    assert(cv[0] == 4.0f && "const v[0] read failed");
+    assert(cv[1] == 5.0f && "const v[1] read failed");
+    assert(cv[2] == 6.0f && "const v[2] read failed");
+    
+    std::cout << "test_array_indexing passed." << std::endl;
+}
+
 void test_utility_functions() {
     std::cout << "Running test_utility_functions..." << std::endl;
     nvec3::Vec3 v1 = nvec3::Vec3::zero();
@@ -204,6 +228,7 @@ int main() {
     test_subtraction();
     test_scalar_multiplication();
     test_scalar_division();
+    test_array_indexing();
     test_utility_functions();
     test_length_and_normalize();
     test_dot_cross();

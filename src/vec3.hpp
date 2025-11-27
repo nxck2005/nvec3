@@ -101,6 +101,19 @@ namespace nvec3 {
             return Vec3(this->x * scalar, this->y * scalar, this->z * scalar);
         }
 
+        // Array subscript operator
+        constexpr float& operator[](int i) {
+            if (i == 0) return x;
+            if (i == 1) return y;
+            return z;
+        }
+
+        constexpr const float& operator[](int i) const {
+            if (i == 0) return x;
+            if (i == 1) return y;
+            return z;
+        }
+
         // utility functions (ideas from game engines)
         [[nodiscard]] constexpr static Vec3 zero() noexcept {
             return Vec3(0.0f, 0.0f, 0.0f);
